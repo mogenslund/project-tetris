@@ -1,0 +1,7 @@
+{:deps
+ {mogenslund/liquid
+  {:git/url "https://github.com/mogenslund/liquid.git",
+   :tag "v1.0.0",
+   :sha "0bca7c16638ec20ed692ae0f16339cfe21f022f0"},
+  },
+ :paths ["src"]}
