@@ -11,6 +11,13 @@
   (Thread/sleep 300)
   (editor/highlight-sexp-at-point))
 
+(defn f4-highlight
+  []
+  (editor/highlight-sexp-at-point)
+  (editor/updated)
+  (Thread/sleep 300)
+  (editor/highlight-sexp-at-point))
+
 (defn -main
   [& args]
   ;; Initialize
@@ -34,7 +41,8 @@
   (editor/add-snippet "(nulstil)")
   (editor/add-snippet "(skjul)")
   (editor/add-snippet "(firkant 0 0 \"blå\")")
-  (editor/set-global-key "f5" f5-eval))
+  (editor/set-global-key "f5" f5-eval)
+  (editor/set-global-key "f4" f4-highlight))
 
 (ns user
   (:require [tetris.view :refer
