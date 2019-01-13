@@ -1,5 +1,6 @@
 (ns editor.core
   (:require [clojure.string :as str]
+            [tetris.view :as view]
             [dk.salza.liq.apps.textapp :as textapp]
             [dk.salza.liq.core :as liq-core]
             [dk.salza.liq.editor :as editor]))
@@ -42,7 +43,9 @@
   (editor/add-snippet "(skjul)")
   (editor/add-snippet "(firkant 0 0 \"blå\")")
   (editor/set-global-key "f5" f5-eval)
-  (editor/set-global-key "f4" f4-highlight))
+  (editor/set-global-key "f4" f4-highlight)
+  (editor/set-global-key "f6" #(editor/eval-sexp (editor/get-content)))
+  (view/vis))
 
 (ns user
   (:require [tetris.view :refer
