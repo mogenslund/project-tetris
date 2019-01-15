@@ -49,7 +49,11 @@
 
 (ns user
   (:require [tetris.view :refer
-              [vis
+              [show
+               hide
+               square
+               vis
+               reset
                skjul
                firkant
                sleep
