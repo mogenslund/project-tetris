@@ -4,8 +4,8 @@
            [java.awt Dimension Toolkit Color]
            [java.net URL]))
 
-(def rows 18)
-(def columns 10)
+(def rows 24)
+(def columns 24)
 
 (defn sleep
   [ms]
@@ -32,9 +32,9 @@
             (= c "grå") (.setColor g (Color/gray))
             (= c "grøn") (.setColor g (Color/green))
             (= c "hvid") (.setColor g (Color/white)))
-    (.fillRect g (+ 100 (* k 20)) (+ 100 (* r 20)) 20 20)
+    (.fillRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20)
     (.setColor g (Color/gray))
-    (.drawRect g (+ 100 (* k 20)) (+ 100 (* r 20)) 20 20))))
+    (.drawRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20))))
 
 
 (def fr (JFrame.))
@@ -59,8 +59,8 @@
 (defn show
   []
   (.show fr)
-  (.setPreferredSize fr (Dimension. 500 600))
-  (.setPreferredSize panel (Dimension. 500 600))
+  ;(.setPreferredSize fr (Dimension. (* 20 columns) (* 20 rows)))
+  (.setPreferredSize panel (Dimension. (* 20 (+ columns 1)) (* 20 (+ rows 1))))
   (.add fr panel)
   (.pack fr))
 
