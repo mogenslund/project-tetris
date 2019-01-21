@@ -6,6 +6,26 @@
 
 (def rows 24)
 (def columns 24)
+(def colormap (atom {
+  "black" (Color/black)
+  "yellow" (Color/yellow)
+  "blue" (Color/blue)
+  "red" (Color/red)
+  "gray" (Color/gray)
+  "green" (Color/green)
+  "white" (Color/white)
+  "sort" (Color/black)
+  "gul" (Color/yellow)
+  "blå" (Color/blue)
+  "rød" (Color/red)
+  "grå" (Color/gray)
+  "grøn" (Color/green)
+  "hvid" (Color/white)
+  }))
+
+(defn add-color
+  [name r g b]
+  (swap! colormap assoc name (Color. r g b)))
 
 (defn sleep
   [ms]
@@ -18,23 +38,10 @@
   (doseq [r (range rows) k (range columns)]
     (.setColor g (Color/white))
     (let [c (get-in @state [:squares r k])]
-      (cond (= c "black") (.setColor g (Color/black))
-            (= c "yellow") (.setColor g (Color/yellow))
-            (= c "blue") (.setColor g (Color/blue))
-            (= c "red") (.setColor g (Color/red))
-            (= c "gray") (.setColor g (Color/gray))
-            (= c "green") (.setColor g (Color/green))
-            (= c "white") (.setColor g (Color/white))
-            (= c "sort") (.setColor g (Color/black))
-            (= c "gul") (.setColor g (Color/yellow))
-            (= c "blå") (.setColor g (Color/blue))
-            (= c "rød") (.setColor g (Color/red))
-            (= c "grå") (.setColor g (Color/gray))
-            (= c "grøn") (.setColor g (Color/green))
-            (= c "hvid") (.setColor g (Color/white)))
-    (.fillRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20)
-    (.setColor g (Color/gray))
-    (.drawRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20))))
+      (.setColor g (@colormap c))
+      (.fillRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20)
+      (.setColor g (Color/gray))
+      (.drawRect g (+ 10 (* k 20)) (+ 10 (* r 20)) 20 20))))
 
 
 (def fr (JFrame.))
@@ -50,6 +57,10 @@
   (swap! state update :squares assoc-in [r k] color)
   (.repaint fr))
 
+(defn big-square
+  [r k h b color]
+  (doseq [r1 (range h) k1 (range b)]
+    (square (+ r r1) (+ k k1) color)))
 
 (defn reset
   []
@@ -69,7 +80,9 @@
   (.dispose fr))
 
 (def firkant square)
+(def stor-firkant big-square)
 (def nulstil reset)
 (def vis show)
 (def skjul hide)
+(def ny-farve add-color)
 

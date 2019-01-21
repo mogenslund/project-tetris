@@ -52,9 +52,13 @@
               [show
                hide
                square
+               big-square
                vis
                reset
                skjul
                firkant
+               stor-firkant
                sleep
+               add-color
+               ny-farve
                get-frame nulstil]]))
